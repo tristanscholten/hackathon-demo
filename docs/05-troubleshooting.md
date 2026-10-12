@@ -40,7 +40,7 @@ Check the image name is fully qualified and lowercase:
 ghcr.io/tristanscholten/hackathon-demo:TAG
 ```
 
-For a manual push, authenticate with a **classic** PAT with `write:packages`, sent through `--password-stdin`. GitHub's token UI can select broad `repo` alongside `write:packages`; clear `repo` unless you independently need it.
+For a manual push, authenticate with a **classic** PAT created with GitHub's [package-only `write:packages` link](https://github.com/settings/tokens/new?scopes=write:packages), then send it through `--password-stdin`. This documented link avoids the unnecessary broad `repo` scope; see [Lesson 3](03-ghcr.md).
 
 For Actions, check that `.github/workflows/publish-ghcr.yml` still declares `packages: write`, runs from this repository, and was triggered by a push to `main` or a `v*` tag. The workflow does not publish pull requests.
 
