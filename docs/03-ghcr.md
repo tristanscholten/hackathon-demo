@@ -43,7 +43,7 @@ Use this path to learn or when you intentionally do not use CI. Do not paste a t
 
    `v0.1.0` already exists for this project. Do not try to overwrite a released, immutable tag; choose a new version such as the example above.
 
-3. Create a **classic** personal access token in GitHub's [token settings](https://github.com/settings/tokens/new). GitHub Packages supports classic PATs for this use. Select `write:packages` to push; select `read:packages` only when you need to pull a private image. GitHub's UI may automatically select broad `repo` when you select `write:packages`; clear it unless you separately need that broad repository access.
+3. Create a **classic** personal access token using GitHub's [package-only token link](https://github.com/settings/tokens/new?scopes=write:packages). GitHub Packages supports classic PATs for this use. The link uses GitHub's documented workaround so `write:packages` is selected without the unnecessary broad `repo` scope. Select `read:packages` only when you need to pull a private image.
 
 4. At the masked prompt below, paste the token. It is read from standard input, not placed in the command line:
 
