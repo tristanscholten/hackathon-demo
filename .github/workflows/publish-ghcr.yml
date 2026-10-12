@@ -1,0 +1,34 @@
+name: Publish GHCR image
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Choose image tag
+        id: image
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=main" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Log in to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+      - name: Build and push
+        run: |
+          IMAGE="ghcr.io/${{ github.repository_owner }}/hackathon-demo:${{ steps.image.outputs.tag }}"
+          docker build --file Containerfile \
+            --label "org.opencontainers.image.source=https://github.com/${{ github.repository }}" \
+            --tag "$IMAGE" .
+          docker push "$IMAGE"
