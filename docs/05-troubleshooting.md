@@ -26,15 +26,27 @@ podman ps
 
 On rootless Linux setups, Podman normally runs as your normal user. Do not retry with `sudo` just to make this demo work; inspect the reported rootless/networking error and follow your operating system's Podman instructions.
 
+## `denied` when pulling from GHCR
+
+The package may still be private. A public repository does not automatically make its GHCR package public. Follow the one-time **Package settings** → **Danger Zone** → **Change visibility** → **Public** instructions in [Lesson 3](03-ghcr.md). Public GHCR packages allow anonymous pulls.
+
+To test without your normal saved login or cached image, use the empty-auth-file command from Lesson 3. Do not put a PAT in `podman pull` command arguments.
+
 ## `denied` when pushing to GHCR
 
-Check the image name is fully qualified:
+Check the image name is fully qualified and lowercase:
 
 ```text
 ghcr.io/tristanscholten/hackathon-demo:TAG
 ```
 
-For Actions, check the workflow has `packages: write` and is running from the repository that owns the package. For manual pushes, authenticate with a classic PAT that has `write:packages`, sent through `--password-stdin`. A package previously created without a repository link can need manual access configuration; see the [GHCR guide](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry).
+For a manual push, authenticate with a **classic** PAT created with GitHub's [package-only `write:packages` link](https://github.com/settings/tokens/new?scopes=write:packages), then send it through `--password-stdin`. This documented link avoids the unnecessary broad `repo` scope; see [Lesson 3](03-ghcr.md).
+
+For Actions, check that `.github/workflows/publish-ghcr.yml` still declares `packages: write`, runs from this repository, and was triggered by a push to `main` or a `v*` tag. The workflow does not publish pull requests.
+
+## The image version already exists
+
+Do not overwrite a released image tag. Choose a new SemVer version, such as `v0.1.1`, and for Actions create and push a new annotated Git tag. See [Lesson 3](03-ghcr.md).
 
 ## `go: command not found`
 
