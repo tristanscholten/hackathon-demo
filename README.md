@@ -7,7 +7,7 @@ A tiny, beginner-friendly Go service. It teaches four things in one small projec
 3. Put the program in a small container image.
 4. Publish that image to GitHub Container Registry (GHCR).
 
-Start here: [your first local run](docs/01-local-go.md). Then use [the container lesson](docs/02-container.md), [the GHCR lesson](docs/03-ghcr.md), and [troubleshooting](docs/05-troubleshooting.md). The requirements are in [requirements/README.md](requirements/README.md).
+Start here: [your first local run](docs/01-local-go.md). Then use [the container lesson](docs/02-container.md), the [GHCR lesson](docs/03-ghcr.md) (choose manual push **or** GitHub Actions publishing), and [troubleshooting](docs/05-troubleshooting.md). The requirements are in [requirements/README.md](requirements/README.md).
 
 ## What you will build
 

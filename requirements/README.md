@@ -22,6 +22,6 @@ Kubernetes, Helm, databases, authentication, OAuth, GitOps, and a monitoring sta
 | R2 | Metrics use stable Prometheus HELP, TYPE, and counter lines. | `httptest` asserts the exposition. |
 | R3 | Concurrent requests do not race or lose counter increments. | `go test -race ./...` and concurrent unit test. |
 | R4 | The documented container starts as non-root and serves port 8080. | Inspect Containerfile; build/run/probe with Podman. |
-| R5 | Docs explain GHCR publishing without claiming deployment or automatic public visibility. | Documentation review and link check. |
+| R5 | Docs offer one beginner GHCR path at a time (manual Podman or the existing Actions workflow), explain registry versus hosting and repository versus package visibility, and do not claim deployment or automatic public visibility. | Documentation review and link check. |
 
 Priority: all items are required for the initial tutorial because omitting one breaks the stated learning path. Acceptance authority: the repository reviewer.
